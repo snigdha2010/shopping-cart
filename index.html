@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subtoal">1278</span> </h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$0</h5>
                      </div>
                   </div>
                </div>
@@ -84,49 +84,165 @@
 
    //i-phone Shopping
 
-         getplusBtn ("plusBtnPhn","currentQuantity","iPhonePrice",1219);
+      //   getplusBtn ("plusBtnPhn","currentQuantity","iPhonePrice",1219,"subtoal");
 
-         getMinusBtn("minusBtn","currentQuantity","iPhonePrice",1219);
+      //   getMinusBtn("minusBtn","currentQuantity","iPhonePrice",1219,"subtoal");
 
    //i-phone Case Shopping
    
-          getplusBtn("plusBtnCase","currentQuantityCase","phoneCasePrice",59);
-          getMinusBtn("minusBtnCase","currentQuantityCase","phoneCasePrice",59);
+         // getplusBtn("plusBtnCase","currentQuantityCase","phoneCasePrice",59,"cart-total");
+          //getMinusBtn("minusBtnCase","currentQuantityCase","phoneCasePrice",59,"cart-total");
 
    //plus button event handling function
-      function getplusBtn(plsBtnId,currentQuantity,productPrice, price ){
-         const plusBtnPhn = document.getElementById(plsBtnId);
-         plusBtnPhn.addEventListener("click",function(){
+      //function getplusBtn(plsBtnId,currentQuantity,productPrice, price,total){
+      //    const plusBtnPhn = document.getElementById("plusBtnPhn");
+      //    plusBtnPhn.addEventListener("click",function(){
       
+      //    // var addedQuantity = setQuantityBox(currentQuantity);
+      //    // var finalPlusQuantity = document.getElementById(currentQuantity).value = addedQuantity + 1;
+      //    // var finalPlusEventPrice = finalPlusQuantity * price ;
+
+      //    var totalIphonePlusPriceAmount = getTotalPlusiPhonePrice("currentQuantity",1219);
+      //    document.getElementById("iPhonePrice").innerText = totalIphonePlusPriceAmount;
+
+      //    // var totalIphoneMinusPriceAmount = getTotalMinusiPhonePrice("currentQuantity",1219);
+      //    // document.getElementById("iPhonePrice").innerText = totalIphoneMinusPriceAmount;
+
+      //    // var cartValue = document.getElementById(ctotal).value; 
+      //    // var cartValueNum = parseFloat(cartValue);
+      //    // var cartTotal = cartValueNum+finalPlusEventPrice;
+      //   // document.getElementById(total).innerText = totalIphonePlusPriceAmount + totalIphoneMinusPriceAmount ;
+      //   const cartSubTotal = setSubtotal();
+      //    document.getElementById("subtoal").innerText = totalIphonePlusPriceAmount+cartSubTotal
+
+      
+
+
+    //  })
+      //}
+         PlusBtn("plusBtnPhn","currentQuantity",1219,"iPhonePrice","subtoal");
+         PlusBtn("plusBtnCase","currentQuantityCase",59,"phoneCasePrice","subtoal");
+
+         function PlusBtn(typeOfBtn, currentQuantityCase,unitPrice, priceHolder,subtoal ){
+            const plusBtnCase = document.getElementById(typeOfBtn);
+            plusBtnCase.addEventListener("click",function(){
+            var totalIphonePlusCaseAmount = getTotalPlusiPhonePrice(currentQuantityCase,unitPrice);
+            document.getElementById(priceHolder).innerText = totalIphonePlusCaseAmount;
+
+           const cartSubTotal = setSubtotal();
+           document.getElementById(subtoal).innerText = cartSubTotal + unitPrice;
+
+      
+         })
+
+         }
+
+         minusBtn("minusBtn","currentQuantity",1219,"iPhonePrice","subtoal");
+         minusBtn("minusBtnCase","currentQuantityCase",59,"phoneCasePrice","subtoal");
+
+         function minusBtn(typeOfBtn, currentQuantityCase,unitPrice, priceHolder,subtoal ){
+            const minusBtnCase = document.getElementById(typeOfBtn);
+            minusBtnCase.addEventListener("click",function(){
+            var totalIphoneMinusCaseAmount = getTotalMinusiPhonePrice(currentQuantityCase,unitPrice);
+            document.getElementById(priceHolder).innerText = totalIphoneMinusCaseAmount;
+
+           const cartSubTotal = setSubtotal();
+           document.getElementById(subtoal).innerText = cartSubTotal - unitPrice;
+
+      
+         })
+
+         }
+
+
+      // const plusBtnCase = document.getElementById("plusBtnCase");
+      //    plusBtnCase.addEventListener("click",function(){
+      //       var totalIphonePlusCaseAmount = getTotalPlusiPhonePrice("currentQuantityCase",59);
+      //       document.getElementById("phoneCasePrice").innerText = totalIphonePlusCaseAmount;
+
+      //      const cartSubTotal = setSubtotal();
+      //      document.getElementById("subtoal").innerText = totalIphonePlusCaseAmount+cartSubTotal
+
+      
+      //    })
+
+         function setSubtotal(){
+           const subtoal = document.getElementById("subtoal").innerText;
+           const subtoalNum = parseFloat(subtoal);
+           return subtoalNum;
+         }
+
+      function getTotalPlusiPhonePrice(currentQuantity,price){
          var addedQuantity = setQuantityBox(currentQuantity);
          var finalPlusQuantity = document.getElementById(currentQuantity).value = addedQuantity + 1;
-         const finalPlusEventPrice = finalPlusQuantity * price ;
-
-         document.getElementById(productPrice).innerText = finalPlusEventPrice;
-
-      })
+         var finalPlusEventPrice = finalPlusQuantity * price ;
+         return finalPlusEventPrice;
       }
 
+      function getTotalMinusiPhonePrice(currentQuantity,price){
+         var deductedQuantity = setQuantityBox(currentQuantity);
+         var finalMinusQuantity = document.getElementById(currentQuantity).value = deductedQuantity - 1;
+         var finalMinusEventPrice = finalMinusQuantity * price; 
+         return finalMinusEventPrice;
+      }
+
+      //    const plusBtnPhn = document.getElementById("plusBtnPhn");
+      //    plusBtnPhn.addEventListener("click",function(){
+      
+      //    var addedQuantity = setQuantityBox("currentQuantity");
+      //    var finalPlusQuantity = document.getElementById("currentQuantity").value = addedQuantity + 1;
+      //    const finalPlusEventPrice = finalPlusQuantity * 1219 ;
+
+      //    document.getElementById("iPhonePrice").innerText = finalPlusEventPrice;
+
+      //    //var cartValue = document.getElementsByClassName("subtoal").value; 
+      //    // var cartValueNum = parseFloat(cartValue);
+      //    // var cartTotal = cartValueNum+finalPlusEventPrice;
+
+      //    document.getElementById("subtoal").innerText = finalPlusEventPrice + getMinusBtn.finalMinusEventPrice ;
+
+      // })
+
+      // const minusBtn = document.getElementById("minusBtn");
+      //    minusBtn.addEventListener("click",function(){
+
+      //    // var deductedQuantity = setQuantityBox("currentQuantity");
+      //    // var finalMinusQuantity = document.getElementById("currentQuantity").value = deductedQuantity - 1;
+      //    // var finalMinusEventPrice = finalMinusQuantity * 1219; 
+
+      //    document.getElementById("iPhonePrice").innerText = finalMinusEventPrice;
+      //    document.getElementById(ctotal).innerText = finalMinusEventPrice + finalPlusEventPrice;
+
+
+
+      //    })
+
+         
+
+
    //minus button event handing function
-      function getMinusBtn(id,cQuantity,itemPrice,casePrice){
+      function getMinusBtn(id,cQuantity,itemPrice,casePrice,ctotal){
          const minusBtn = document.getElementById(id);
          minusBtn.addEventListener("click",function(){
 
          var deductedQuantity = setQuantityBox(cQuantity);
          var finalMinusQuantity = document.getElementById(cQuantity).value = deductedQuantity - 1;
-         const finalMinusEventPrice = finalMinusQuantity * casePrice; 
+         var finalMinusEventPrice = finalMinusQuantity * casePrice; 
 
          document.getElementById(itemPrice).innerText = finalMinusEventPrice;
+         document.getElementById(ctotal).innerText = finalMinusEventPrice + getplusBtn.finalPlusEventPrice;
+
+
 
          })
       }
-
+      
       function setQuantityBox(id){
          const currentQuantity= document.getElementById(id).value;
          var currentQuantityNum = parseFloat(currentQuantity);
          if(currentQuantityNum >= 0) //need to work on this 
          return currentQuantityNum;
-         else return 1;
+         else return 0;
 
       }
 
