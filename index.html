@@ -25,9 +25,9 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button class="btn btn-default"><i id= "minusBtn"class="fas fa-minus"></i></button>
+                           <input id="currentQuantity" type="text" class="form-control text-center" value="1">
+                           <button class="btn btn-default"><i id= "plusBtn"class="fas fa-plus"></i></button>
                         </div>
                         <h5>$1219</h5>
                         <img src="images/remove.png" alt="" class="remove-item">
@@ -77,6 +77,40 @@
          </div>
       </div>
    </section>
+
+
+
+   <script>
+      //plus button event handling
+      const plusBtn = document.getElementById("plusBtn");
+      plusBtn.addEventListener("click",function(){
+      
+      var addedQuantity = setQuantityBox("currentQuantity");
+      document.getElementById("currentQuantity").value = addedQuantity + 1;
+
+      })
+
+      //minus button event handling
+      const minusBtn = document.getElementById("minusBtn");
+      minusBtn.addEventListener("click",function(){
+
+      var deductedQuantity = setQuantityBox("currentQuantity");
+      document.getElementById("currentQuantity").value = deductedQuantity - 1;
+
+
+      })
+
+      function setQuantityBox(id){
+         const currentQuantity= document.getElementById(id).value;
+         var currentQuantityNum = parseFloat(currentQuantity);
+         if(currentQuantityNum > 0) //need to work on this 
+         return currentQuantityNum;
+
+      }
+
+
+   </script>
+
 </body>
 
 </html>
