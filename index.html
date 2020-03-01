@@ -27,9 +27,9 @@
                         <div class="input-group number-spinner">
                            <button class="btn btn-default"><i id= "minusBtn"class="fas fa-minus"></i></button>
                            <input id="currentQuantity" type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i id= "plusBtn"class="fas fa-plus"></i></button>
+                           <button class="btn btn-default"><i id= "plusBtnPhn"class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id ="iPhonePrice">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button class="btn btn-default"><i id="minusBtnCase" class="fas fa-minus"></i></button>
+                           <input id = "currentQuantityCase"type="text" class="form-control text-center" value="1">
+                           <button class="btn btn-default"><i id="plusBtnCase" class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id ="phoneCasePrice">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -81,30 +81,52 @@
 
 
    <script>
-      //plus button event handling
-      const plusBtn = document.getElementById("plusBtn");
-      plusBtn.addEventListener("click",function(){
+
+   //i-phone Shopping
+
+         getplusBtn ("plusBtnPhn","currentQuantity","iPhonePrice",1219);
+
+         getMinusBtn("minusBtn","currentQuantity","iPhonePrice",1219);
+
+   //i-phone Case Shopping
+   
+          getplusBtn("plusBtnCase","currentQuantityCase","phoneCasePrice",59);
+          getMinusBtn("minusBtnCase","currentQuantityCase","phoneCasePrice",59);
+
+   //plus button event handling function
+      function getplusBtn(plsBtnId,currentQuantity,productPrice, price ){
+         const plusBtnPhn = document.getElementById(plsBtnId);
+         plusBtnPhn.addEventListener("click",function(){
       
-      var addedQuantity = setQuantityBox("currentQuantity");
-      document.getElementById("currentQuantity").value = addedQuantity + 1;
+         var addedQuantity = setQuantityBox(currentQuantity);
+         var finalPlusQuantity = document.getElementById(currentQuantity).value = addedQuantity + 1;
+         const finalPlusEventPrice = finalPlusQuantity * price ;
+
+         document.getElementById(productPrice).innerText = finalPlusEventPrice;
 
       })
+      }
 
-      //minus button event handling
-      const minusBtn = document.getElementById("minusBtn");
-      minusBtn.addEventListener("click",function(){
+   //minus button event handing function
+      function getMinusBtn(id,cQuantity,itemPrice,casePrice){
+         const minusBtn = document.getElementById(id);
+         minusBtn.addEventListener("click",function(){
 
-      var deductedQuantity = setQuantityBox("currentQuantity");
-      document.getElementById("currentQuantity").value = deductedQuantity - 1;
+         var deductedQuantity = setQuantityBox(cQuantity);
+         var finalMinusQuantity = document.getElementById(cQuantity).value = deductedQuantity - 1;
+         const finalMinusEventPrice = finalMinusQuantity * casePrice; 
 
+         document.getElementById(itemPrice).innerText = finalMinusEventPrice;
 
-      })
+         })
+      }
 
       function setQuantityBox(id){
          const currentQuantity= document.getElementById(id).value;
          var currentQuantityNum = parseFloat(currentQuantity);
-         if(currentQuantityNum > 0) //need to work on this 
+         if(currentQuantityNum >= 0) //need to work on this 
          return currentQuantityNum;
+         else return 1;
 
       }
 
