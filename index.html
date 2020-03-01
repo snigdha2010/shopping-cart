@@ -16,7 +16,7 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+               <div id ="phoneArea" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -30,12 +30,12 @@
                            <button class="btn btn-default"><i id= "plusBtnPhn"class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id ="iPhonePrice">1219</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img id = "phoneRemoveItem" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div id= "phoneCaseArea" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -49,7 +49,7 @@
 
                         </div>
                         <h5>$<span id ="phoneCasePrice">59</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img id ="caseRemoveItem" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -59,14 +59,14 @@
 
                      <div class="col-md-8">
                         <h5>Subtotal: </h5>
-                        <h5>Tax:</h5>
+                        <h5>Tax(5% Tax):</h5>
                         <h5>Total:</h5>
                      </div>
 
                      <div class="col-md-4 status">
                         <h5>$ <span id="subtoal">1278</span> </h5>
-                        <h5>$0</h5>
-                        <h5>$0</h5>
+                        <h5>$ <span id="totalTax">69.9</span></h5>
+                        <h5>$ <span id="subtotalwithTax">1347.9</span></h5>
                      </div>
                   </div>
                </div>
@@ -84,9 +84,9 @@
 
    //i-phone Shopping
 
-      //   getplusBtn ("plusBtnPhn","currentQuantity","iPhonePrice",1219,"subtoal");
+      //   getplusBtn ("plusBtnPhn","currentQuantity","iPhonePrice",1219,"subtoal","totalTax");
 
-      //   getMinusBtn("minusBtn","currentQuantity","iPhonePrice",1219,"subtoal");
+      //   getMinusBtn("minusBtn","currentQuantity","iPhonePrice",1219,"subtoal","totalTax");
 
    //i-phone Case Shopping
    
@@ -120,34 +120,90 @@
 
     //  })
       //}
-         PlusBtn("plusBtnPhn","currentQuantity",1219,"iPhonePrice","subtoal");
-         PlusBtn("plusBtnCase","currentQuantityCase",59,"phoneCasePrice","subtoal");
+         PlusBtn("plusBtnPhn","currentQuantity",1219,"iPhonePrice","subtoal","totalTax");
+         PlusBtn("plusBtnCase","currentQuantityCase",59,"phoneCasePrice","subtoal","totalTax");
 
-         function PlusBtn(typeOfBtn, currentQuantityCase,unitPrice, priceHolder,subtoal ){
+         function PlusBtn(typeOfBtn, currentQuantityCase,unitPrice, priceHolder,subtoal ,totalTax){
             const plusBtnCase = document.getElementById(typeOfBtn);
             plusBtnCase.addEventListener("click",function(){
             var totalIphonePlusCaseAmount = getTotalPlusiPhonePrice(currentQuantityCase,unitPrice);
             document.getElementById(priceHolder).innerText = totalIphonePlusCaseAmount;
 
            const cartSubTotal = setSubtotal();
-           document.getElementById(subtoal).innerText = cartSubTotal + unitPrice;
+           const cartTotalTax = setTotalTax();
+           const totalCartSubtotal = cartSubTotal +unitPrice;
+           const totalTaxUnit =(cartSubTotal *(.05))+(unitPrice*(.05));
+           document.getElementById(subtoal).innerText = totalCartSubtotal;
+           document.getElementById(totalTax).innerText =totalTaxUnit.toFixed(2);
+           document.getElementById("subtotalwithTax").innerText  = totalCartSubtotal + totalTaxUnit; 
+
+           //document.getElementById("caseRemoveItem").innerText = 
 
       
          })
 
          }
 
-         minusBtn("minusBtn","currentQuantity",1219,"iPhonePrice","subtoal");
-         minusBtn("minusBtnCase","currentQuantityCase",59,"phoneCasePrice","subtoal");
+         // 
+         removeIcon("phoneRemoveItem","phoneArea","iPhonePrice","subtoal","totalTax","subtotalwithTax");
+         removeIcon("caseRemoveItem","phoneCaseArea","phoneCasePrice","subtoal","totalTax","subtotalwithTax");
+         
 
-         function minusBtn(typeOfBtn, currentQuantityCase,unitPrice, priceHolder,subtoal ){
+         function removeIcon(removeItem,caseArea,productPrice,total,taxTotal,totalWithTax){
+            const removeBtn = document.getElementById(removeItem);
+         removeBtn.addEventListener("click",function(){
+
+            const phoneCaseSection = document.getElementById(caseArea);
+            phoneCaseSection.style.display = "none";
+
+            var removePrice= document.getElementById(productPrice).innerText;
+            var removePriceNum = parseFloat(removePrice);
+            var removeSubTotal = document.getElementById(total).innerText;
+            var removeSubTotalNum = parseFloat(removeSubTotal);
+            var newSubtotal = removeSubTotalNum - removePriceNum;
+            document.getElementById(total).innerText = newSubtotal;
+            document.getElementById(taxTotal).innerText = newSubtotal*(.05);
+            document.getElementById(totalWithTax).innerText = (newSubtotal+(newSubtotal*(.05)));
+
+         })
+         }
+         
+         //backup
+         // const removeBtn = document.getElementById("caseRemoveItem");
+         // removeBtn.addEventListener("click",function(){
+
+         //    const phoneCaseSection = document.getElementById("phoneCaseArea");
+         //    phoneCaseSection.style.display = "none";
+
+         //    var removePrice= document.getElementById("phoneCasePrice").innerText;
+         //    var removePriceNum = parseFloat(removePrice);
+         //    var removeSubTotal = document.getElementById("subtoal").innerText;
+         //    var removeSubTotalNum = parseFloat(removeSubTotal);
+         //    var newSubtotal = removeSubTotalNum - removePriceNum;
+         //    document.getElementById("subtoal").innerText = newSubtotal;
+         //    document.getElementById("totalTax").innerText = newSubtotal*(.05);
+         //    document.getElementById("subtotalwithTax").innerText = (newSubtotal+(newSubtotal*(.05)));
+
+         // })
+
+         minusBtn("minusBtn","currentQuantity",1219,"iPhonePrice","subtoal","totalTax");
+         minusBtn("minusBtnCase","currentQuantityCase",59,"phoneCasePrice","subtoal","totalTax");
+
+         function minusBtn(typeOfBtn, currentQuantityCase,unitPrice, priceHolder,subtoal,totalTax ){
             const minusBtnCase = document.getElementById(typeOfBtn);
             minusBtnCase.addEventListener("click",function(){
+
+               
             var totalIphoneMinusCaseAmount = getTotalMinusiPhonePrice(currentQuantityCase,unitPrice);
             document.getElementById(priceHolder).innerText = totalIphoneMinusCaseAmount;
 
            const cartSubTotal = setSubtotal();
-           document.getElementById(subtoal).innerText = cartSubTotal - unitPrice;
+           const totalCartSubtotal = (cartSubTotal - unitPrice);
+           const totalTaxUnit = (cartSubTotal *(.05))- (unitPrice*(.05));
+           document.getElementById(subtoal).innerText = totalCartSubtotal;
+           document.getElementById(totalTax).innerText = totalTaxUnit.toFixed(2);
+           document.getElementById("subtotalwithTax").innerText = totalCartSubtotal+totalTaxUnit;
+
 
       
          })
@@ -165,6 +221,12 @@
 
       
       //    })
+
+         function setTotalTax(){
+            const itemTotalTax = document.getElementById("totalTax").innerText;
+            const itemTotalTaxNum = parseFloat(itemTotalTax);
+            return itemTotalTaxNum;
+         }
 
          function setSubtotal(){
            const subtoal = document.getElementById("subtoal").innerText;
