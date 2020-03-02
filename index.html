@@ -1,3 +1,22 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@snigdha2010 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+Code Issues 0 Pull requests 0 Projects 0 Actions Wiki Security Pulse Community
+shopping-cart/index.html
+ Snigdha Sahara logic almost complete
+14877cd 7 hours ago
+316 lines (229 sloc)  13.4 KB
+  
 <!DOCTYPE html>
 <html>
 
@@ -167,25 +186,7 @@
 
          })
          }
-         
-         //backup
-         // const removeBtn = document.getElementById("caseRemoveItem");
-         // removeBtn.addEventListener("click",function(){
-
-         //    const phoneCaseSection = document.getElementById("phoneCaseArea");
-         //    phoneCaseSection.style.display = "none";
-
-         //    var removePrice= document.getElementById("phoneCasePrice").innerText;
-         //    var removePriceNum = parseFloat(removePrice);
-         //    var removeSubTotal = document.getElementById("subtoal").innerText;
-         //    var removeSubTotalNum = parseFloat(removeSubTotal);
-         //    var newSubtotal = removeSubTotalNum - removePriceNum;
-         //    document.getElementById("subtoal").innerText = newSubtotal;
-         //    document.getElementById("totalTax").innerText = newSubtotal*(.05);
-         //    document.getElementById("subtotalwithTax").innerText = (newSubtotal+(newSubtotal*(.05)));
-
-         // })
-
+      
          minusBtn("minusBtn","currentQuantity",1219,"iPhonePrice","subtoal","totalTax");
          minusBtn("minusBtnCase","currentQuantityCase",59,"phoneCasePrice","subtoal","totalTax");
 
@@ -210,18 +211,6 @@
 
          }
 
-
-      // const plusBtnCase = document.getElementById("plusBtnCase");
-      //    plusBtnCase.addEventListener("click",function(){
-      //       var totalIphonePlusCaseAmount = getTotalPlusiPhonePrice("currentQuantityCase",59);
-      //       document.getElementById("phoneCasePrice").innerText = totalIphonePlusCaseAmount;
-
-      //      const cartSubTotal = setSubtotal();
-      //      document.getElementById("subtoal").innerText = totalIphonePlusCaseAmount+cartSubTotal
-
-      
-      //    })
-
          function setTotalTax(){
             const itemTotalTax = document.getElementById("totalTax").innerText;
             const itemTotalTaxNum = parseFloat(itemTotalTax);
@@ -243,7 +232,12 @@
 
       function getTotalMinusiPhonePrice(currentQuantity,price){
          var deductedQuantity = setQuantityBox(currentQuantity);
-         var finalMinusQuantity = document.getElementById(currentQuantity).value = deductedQuantity - 1;
+         if(deductedQuantity > 0){
+            deductedQuantity = deductedQuantity -1;
+         } else if (deductedQuantity == 0){
+            deductedQuantity =0;
+         }
+         var finalMinusQuantity = document.getElementById(currentQuantity).value = deductedQuantity;
          var finalMinusEventPrice = finalMinusQuantity * price; 
          return finalMinusEventPrice;
       }
@@ -314,3 +308,15 @@
 </body>
 
 </html>
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
